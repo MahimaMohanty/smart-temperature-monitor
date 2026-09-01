@@ -119,12 +119,19 @@ static long temp_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
     }
     return 0;
 }
-
+static loff_t temp_llseek(struct file *file, loff_t offset, int whence)
+{
+	if(whence != SEEK_SET || offset !=0)
+		return -EINVAL;
+	file->f_pos = 0;
+	return 0;
+}
 static const struct file_operations temp_fops = {
     .owner          = THIS_MODULE,
     .open           = temp_open,
     .release        = temp_release,
     .read           = temp_read,
+    .llseek	    = temp_llseek,
     .unlocked_ioctl = temp_ioctl,
 };
 

@@ -21,7 +21,7 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 
-#include "../driver/tempsensor_ioctl.h"
+#include "tempsensor_ioctl.h"
 
 enum class State { NORMAL, WARNING, CRITICAL };
 
